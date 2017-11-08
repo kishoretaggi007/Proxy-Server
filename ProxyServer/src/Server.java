@@ -11,7 +11,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 //TODO: Close the connection when it is HTTP/1.1 and be able to get localhost type addresses
-// TODO: Question for TA, does the port the proxy sends to need to be specified or just use 80?
+
 public class Server implements Runnable
 {
     private final int CLIENTS_LIMIT = 2000;           // Set the number of concurrent clients
@@ -41,7 +41,7 @@ public class Server implements Runnable
     }
 
     /**
-     * Start the proxy and open sockets for multiple clients to connect to.
+     Start the proxy and open sockets for multiple clients to connect to.
      */
     public void initialize()
     {
@@ -64,7 +64,7 @@ public class Server implements Runnable
                 mCurrentConnections++;
 
                 // Send message to client that the server is at it's limit for concurrent connections.
-                // TODO: Maybe have a more 'official' error message
+                
                 if(mCurrentConnections > CLIENTS_LIMIT)
                 {
                     PrintStream outMessage = new PrintStream(mSocket.getOutputStream());
@@ -117,8 +117,8 @@ public class Server implements Runnable
         }
     }
 
-    /**
-     * Signal that a client has disconnected.
+    /*
+      Signal that a client has disconnected.
      */
     public void clientDisconnected(UUID clientId)
     {
@@ -126,9 +126,9 @@ public class Server implements Runnable
         mCurrentConnections--;
     }
 
-    /**
-     * Checks the cache for cached page, if it exists the Server will return
-     * the contents of the page, otherwise a null will be returned.
+    /*
+      Checks the cache for cached page, if it exists the Server will return
+      the contents of the page, otherwise a null will be returned.
      */
     public String getCachedPage(String domain)
     {
@@ -160,7 +160,7 @@ public class Server implements Runnable
             try
             {
                 
-                String path = "Files/file"+ domain.hashCode();
+                String path = "files/file"+ domain.hashCode();
                 File file = new File(path);
                 outputStream = new FileOutputStream(file);
                 byte[] content = page.getBytes(StandardCharsets.UTF_8);
